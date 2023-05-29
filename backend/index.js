@@ -2,6 +2,10 @@
 const express = require('express');
 const app = express();
 
+//requiring cors --> doubt use?
+const cors = require('cors');
+app.use(cors());
+
 //requiring database
 const connectToMongo = require('./db');
 connectToMongo();

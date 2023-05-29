@@ -5,7 +5,7 @@ const Navbar = () => {
   //storing useLocation inside another variable for further use
   let location = useLocation();
   useEffect(() => {
-    console.log(location);
+    // console.log(location);
   }, [location]);
 
   return (
