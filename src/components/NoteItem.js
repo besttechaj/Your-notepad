@@ -6,16 +6,10 @@ const NoteItem = (props) => {
   //fetching delete note from context
   const { deleteNote } = context;
 
-  const { note } = props;
+  const { note, updateNote } = props;
   return (
-    <div className='col-md-3 my-3 mx-4' style={{ border: '2px solid red' }}>
-      <div
-        className='card'
-        style={{
-          width: '15rem',
-          border: '2px solid blue',
-        }}
-      >
+    <div className='col-md-3 my-3 mx-4'>
+      <div className='card'>
         <div className='card-body'>
           <h5 className='card-title'>{note.title}</h5>
           <p className='card-text'> {note.description}</p>
@@ -27,7 +21,13 @@ const NoteItem = (props) => {
                 deleteNote(note._id);
               }}
             ></i>
-            <i className='fa-solid fa-pen-to-square mx-2'></i>
+            <i
+              className='fa-solid fa-pen-to-square mx-2'
+              //here we are passing a function with argument hence declaration inside anonymous function
+              onClick={() => {
+                updateNote(note);
+              }}
+            ></i>
           </div>
         </div>
       </div>

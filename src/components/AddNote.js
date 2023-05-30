@@ -38,14 +38,7 @@ const AddNote = () => {
   };
 
   return (
-    <div
-      className='container my-3'
-      style={{
-        backgroundColor: 'violet',
-        borderRadius: '20px',
-        padding: '5px',
-      }}
-    >
+    <div className='container my-3'>
       <h4>Add a note</h4>
       <form className='my-3'>
         <div className='mb-3'>
