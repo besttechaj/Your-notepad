@@ -6,6 +6,8 @@ import NoteContext from './noteContext';
 const NoteState = (props) => {
   const host = 'http://localhost:5000';
 
+  ///////////////////////////////////////////////////////////////////
+
   //Fetched current user notes
   let initialNotes = [];
 
@@ -24,7 +26,7 @@ const NoteState = (props) => {
       },
     });
     const json = await response.json();
-    console.log(json);
+    // console.log(json);
     setNotes(json);
   };
   ////////////////////////////////////////////////////////////////////
@@ -44,6 +46,8 @@ const NoteState = (props) => {
 
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
+    const json = response.json();
+    console.log(json);
 
     //logic to add
 
@@ -59,6 +63,8 @@ const NoteState = (props) => {
     // .concat will always return a new array while updating the old array
     setNotes(notes.concat(note));
   };
+
+  ///////////////////////////////////////////////////////////////
 
   //creating a function to delete the note
   const deleteNote = async (id) => {
@@ -89,11 +95,13 @@ const NoteState = (props) => {
     // });
   };
 
+  ////////////////////////////////////////////////////////////////
+
   //creating a function to edit the note
   const editNote = async (id, title, description, tag) => {
     //TODO:API CALL
     const response = await fetch(`${host}/api/notes/updatenote/${id}`, {
-      method: 'POST', // *GET, POST, PUT, DELETE, etc.
+      method: 'PUT', // *GET, POST, PUT, DELETE, etc.
 
       headers: {
         'Content-Type': 'application/json',
@@ -101,9 +109,37 @@ const NoteState = (props) => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1YzI3MzY4MWQ3NTU1ZWNlY2RlNmIyIn0sImlhdCI6MTY4MzkyMjc5NX0.YjSYk6fJ4Zv9qzhlYBI3h4AFtIIUvOPqzh11XrgiW-M',
       },
 
+      //A common use of JSON is to exchange data to/from a web server.When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
-    const json = response.json(); // parses JSON response into native JavaScript objects
+    // const json = await response.json();
+    // console.log(json);
+
+    //displaying the previous notes state
+    // console.log(`previous client notes are`, notes);
+
+    //METHOD -01(LOGIC TO UPDATE FRONT-END/CLIENT SIDE NOTE)
+    //displaying the updated notes state
+    //fetching all the notes after update at backend side and setting the setNotes with the new fetched notes and displaying it on client side.
+    getNotes();
+
+    /*
+    METHOD -02(CREATING ANOTHER LOGIC TO UPDATE THE FRONT-END NOTE)
+    JSON.PARSE()-> A common use of JSON is to exchange data to/from a web server.When receiving data from a web server, the data is always a string.Parse the data with JSON.parse(), and the data becomes a JavaScript object.
+
+    let newNotes = JSON.parse(JSON.stringify(notes)); //DOUBT??USE
+    console.log(`edited notes fetched from database are`, newNotes);
+    
+
+    .map returns a new array
+    let newarray = newNotes.map((element) =>
+      element._id === id
+        ? { ...element, title: title, description: description, tag: tag }
+        : element
+    );
+    console.log(`solution`, newarray);
+    setNotes(newarray);
+    */
   };
 
   return (

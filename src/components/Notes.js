@@ -1,3 +1,26 @@
+//useRef Hook-> consider one MODAL example:
+/*
+importing ref 
+import  {useRef} from 'react'
+const refClose=useRef(null);
+
+I WANT TO CLOSE THE MODAL WHENEVER I CLICK ON SUBMIT BUTTON OR CLOSE BUTTON
+const handleClick=(e)=>{
+e.preventDefault();
+
+SINCE REF BELONGS TO ANOTHER ELEMENT BUT HERE WE ARE USING REF INSIDE ANOTHER ELEMENT'S ATTRIBUTE EVENT FUNCTION I.E. handleClick()
+refClose.current.click();
+}
+
+<form>
+ <>BODY OF THE FORM<>
+ 
+ HERE ref BELONGS TO CLOSE BUTTON ELEMENT, whenever we want to perform some operation on a element we need to declare  javascript's onClick event attribute event inside that specific element but here we are using ref(belongs to another element attribute) and performing the operation by calling the ref inside another's element function.  
+      <button   ref= { refClose }  >Close button</button>
+        <button onClick={handleClick}>Submit button</button>
+</form>
+*/
+
 import React, { useContext, useEffect, useRef, useState } from 'react';
 //importing context
 import noteContext from '../context/notes/noteContext';
@@ -8,7 +31,7 @@ const Notes = () => {
   const context = useContext(noteContext);
 
   //const notes=context.notes , const addNote=context.addNote ... can be written using destructure property as :
-  const { notes, getNotes } = context;
+  const { notes, getNotes, editNote } = context;
 
   useEffect(() => {
     getNotes();
@@ -17,22 +40,25 @@ const Notes = () => {
 
   //initial value of ref will be blank
   const ref = useRef(null);
+  const refClose = useRef(null);
 
   //declaring update note function
   const updateNote = (currentNote) => {
     ref.current.click();
     //when a user clicked on any note's edit button then open a modal and display current note in it.
     setNote({
+      id: currentNote._id,
       etitle: currentNote.title,
       edescription: currentNote.description,
       etag: currentNote.tag,
     });
   };
 
-  //content regarding edit for
+  //content regarding edit form
 
   //defining use state initial state's value
   const [note, setNote] = useState({
+    id: '',
     etitle: '',
     edescription: '',
     etag: '',
@@ -55,20 +81,26 @@ const Notes = () => {
   };
 
   //handle submit button function ...
-  const handleClick = (e) => {
+  const handleClick = () => {
     console.log('note has been updated');
-    e.preventDefault();
-    //since we have fetched the add note hence we can pass the new note to it
-    // editNote(note.title, note.description, note.tag);
+
+    //passing the values to editNote function
+    editNote(note.id, note.etitle, note.edescription, note.etag);
+
+    //using the refClose inside another method
+    refClose.current.click();
   };
   return (
     <>
       {/* <!-- Button trigger modal --> */}
       <button
         type='button'
+        //giving class d-none which means display:none , we are hiding the button
         className='btn btn-primary d-none'
         data-bs-toggle='modal'
         data-bs-target='#exampleModal'
+        //giving ref to this element
+
         ref={ref}
       >
         Launch demo modal
@@ -143,6 +175,8 @@ const Notes = () => {
                 type='button'
                 className='btn btn-secondary'
                 data-bs-dismiss='modal'
+                //giving ref to this element
+                ref={refClose}
               >
                 Close
               </button>

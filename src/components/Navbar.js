@@ -15,7 +15,7 @@ const Navbar = () => {
     >
       <div className='container-fluid'>
         <Link className='navbar-brand' to='/'>
-          i_notebook
+          Your_Notebook
         </Link>
         <button
           className='navbar-toggler'
