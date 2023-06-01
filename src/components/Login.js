@@ -35,18 +35,19 @@ const Login = (props) => {
         password: credentials.password,
       }),
     });
-    const json = await response.json(); //extracting success and authtoken
-    console.log(json); //extracting success and authtoken
+    let json = await response.json(); //extracting success and authToken
+
+    console.log(json); //extracting success and authToken
     //to redirect the user to homepage, we have added success variable at backend and we are fetching it here so if it is true then redirect the user to home page else display error message
     if (json.success) {
       //save the auth-token and re-direct the user to its homepage
       //setItem will take 2 values ..variable name and its value
-      localStorage.setItem('token', json.authtoken);
+      localStorage.setItem('token', json.authToken);
 
-      //redirecting user using useNavigate Hook
-      navigate('/');
       //using props via destructuring
       showAlert('success', 'Logged-in successful');
+      //redirecting user using useNavigate Hook
+      navigate('/');
     } else {
       //using props via destructuring
       showAlert('danger', 'Logged-in Unsuccessful due to invalid credentials');
@@ -55,8 +56,8 @@ const Login = (props) => {
 
   return (
     <div className='container my-3'>
-      <h3>Login</h3>
       <form onSubmit={handleSubmit}>
+        <h3 style={{ color: 'red' }}>Login</h3>
         <div className='mb-3'>
           <label htmlFor='email' className='form-label'>
             Email address

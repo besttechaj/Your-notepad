@@ -21,8 +21,7 @@ const NoteState = (props) => {
 
       headers: {
         'Content-Type': 'application/json',
-        'auth-token':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1YzI3MzY4MWQ3NTU1ZWNlY2RlNmIyIn0sImlhdCI6MTY4MzkyMjc5NX0.YjSYk6fJ4Zv9qzhlYBI3h4AFtIIUvOPqzh11XrgiW-M',
+        'auth-token': localStorage.getItem('token'),
       },
     });
     const json = await response.json();
@@ -41,8 +40,7 @@ const NoteState = (props) => {
 
       headers: {
         'Content-Type': 'application/json',
-        'auth-token':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1YzI3MzY4MWQ3NTU1ZWNlY2RlNmIyIn0sImlhdCI6MTY4MzkyMjc5NX0.YjSYk6fJ4Zv9qzhlYBI3h4AFtIIUvOPqzh11XrgiW-M',
+        'auth-token': localStorage.getItem('token'),
       },
 
       body: JSON.stringify({
@@ -69,8 +67,7 @@ const NoteState = (props) => {
 
       headers: {
         'Content-Type': 'application/json',
-        'auth-token':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1YzI3MzY4MWQ3NTU1ZWNlY2RlNmIyIn0sImlhdCI6MTY4MzkyMjc5NX0.YjSYk6fJ4Zv9qzhlYBI3h4AFtIIUvOPqzh11XrgiW-M',
+        'auth-token': localStorage.getItem('token'),
       },
     });
     const json = await response.json(); // parses JSON response into native JavaScript objects
@@ -98,8 +95,7 @@ const NoteState = (props) => {
 
       headers: {
         'Content-Type': 'application/json',
-        'auth-token':
-          'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1YzI3MzY4MWQ3NTU1ZWNlY2RlNmIyIn0sImlhdCI6MTY4MzkyMjc5NX0.YjSYk6fJ4Zv9qzhlYBI3h4AFtIIUvOPqzh11XrgiW-M',
+        'auth-token': localStorage.getItem('token'),
       },
 
       //A common use of JSON is to exchange data to/from a web server.When sending data to a web server, the data has to be a string.Convert a JavaScript object into a string with JSON.stringify().

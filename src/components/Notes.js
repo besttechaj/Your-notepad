@@ -26,7 +26,10 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import noteContext from '../context/notes/noteContext';
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
+import { useNavigate } from 'react-router-dom';
 const Notes = (props) => {
+  let navigate = useNavigate();
+
   const { showAlert } = props;
 
   //importing use context
@@ -36,7 +39,12 @@ const Notes = (props) => {
   const { notes, getNotes, editNote } = context;
 
   useEffect(() => {
-    getNotes();
+    //if user has a valid authtoken then display the notes else redirect user to the login page
+    if (localStorage.getItem('token')) {
+      getNotes();
+    } else {
+      navigate('/login');
+    }
     //eslint-disable-next-line
   }, []);
 

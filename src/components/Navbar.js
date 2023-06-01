@@ -1,21 +1,30 @@
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 const Navbar = () => {
   //storing useLocation inside another variable for further use
   let location = useLocation();
+  let navigate = useNavigate;
   useEffect(() => {
     // console.log(location);
   }, [location]);
+
+  //logging out user
+  const handleLogout = () => {
+    //remove the token
+    localStorage.removeItem('token');
+    //redirect user
+    navigate('/login');
+  };
 
   return (
     <nav
       className='navbar navbar-expand-lg bg-body-tertiary sticky-top'
       data-bs-theme='dark'
-      style={{ height: '45px' }}
+      style={{ height: '60px' }}
     >
       <div className='container-fluid'>
-        <Link className='navbar-brand' to='/'>
+        <Link className='navbar-brand' to='/' style={{ color: 'red' }}>
           Your_Notebook
         </Link>
         <button
@@ -62,14 +71,33 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <form className='d-flex'>
-            <Link to='/login' className='btn btn-primary mx-1' role='button'>
-              Login
+          {!localStorage.getItem('token') ? (
+            <form className='d-flex'>
+              <Link
+                to='/login'
+                className='btn btn-primary btn-sm mx-1'
+                role='button'
+              >
+                Login
+              </Link>
+              <Link
+                to='/signup'
+                className='btn btn-primary btn-sm mx-1'
+                role='button'
+              >
+                SignUp
+              </Link>
+            </form>
+          ) : (
+            <Link
+              to='/login'
+              className='btn btn-primary btn-sm'
+              role='button'
+              onClick={handleLogout}
+            >
+              Logout
             </Link>
-            <Link to='/signup' className='btn btn-primary mx-1' role='button'>
-              SignUp
-            </Link>
-          </form>
+          )}
         </div>
       </div>
     </nav>
