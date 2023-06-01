@@ -62,12 +62,12 @@ const Navbar = () => {
             </li>
           </ul>
           <form className='d-flex'>
-            <a href='/login' className='btn btn-primary mx-2' role='button'>
+            <Link to='/login' className='btn btn-primary mx-1' role='button'>
               Login
-            </a>
-            <a href='/signup' className='btn btn-primary mx-2' role='button'>
+            </Link>
+            <Link to='/signup' className='btn btn-primary mx-1' role='button'>
               SignUp
-            </a>
+            </Link>
           </form>
         </div>
       </div>
