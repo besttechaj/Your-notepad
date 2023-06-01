@@ -140,6 +140,8 @@ const Notes = () => {
                     name='etitle'
                     onChange={onChange}
                     value={note.etitle}
+                    minLength={2}
+                    required
                   />
                 </div>
                 <div className='mb-3'>
@@ -153,6 +155,8 @@ const Notes = () => {
                     name='edescription'
                     onChange={onChange}
                     value={note.edescription}
+                    minLength={2}
+                    required
                   />
                 </div>
                 <div className='mb-3'>
@@ -166,6 +170,8 @@ const Notes = () => {
                     name='etag'
                     onChange={onChange}
                     value={note.etag}
+                    minLength={2}
+                    required
                   />
                 </div>
               </form>
@@ -184,6 +190,11 @@ const Notes = () => {
                 type='button'
                 className='btn btn-primary'
                 onClick={handleClick}
+                disabled={
+                  note.etitle.length < 2 ||
+                  note.edescription.length < 2 ||
+                  note.etag.length < 2
+                }
               >
                 Update Note
               </button>
@@ -199,6 +210,9 @@ const Notes = () => {
         {/* displaying all the user existing note */}
         <div className='row mx-3'>
           <h4>Your note</h4>
+          <div className='container'>
+            {notes.length === 0 && 'No Notes to display'}
+          </div>
           {notes.map((note) => {
             return (
               <NoteItem key={note._id} note={note} updateNote={updateNote} />

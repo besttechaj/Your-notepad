@@ -46,20 +46,9 @@ const NoteState = (props) => {
 
       body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
     });
-    const json = response.json();
-    console.log(json);
+    const note = await response.json();
+    console.log(note);
 
-    //logic to add
-
-    const note = {
-      _id: '6461f3cc5820896sddf12131dafee',
-      user: '645c273681d7555ececde6b2',
-      title: title,
-      description: description,
-      tag: tag,
-      date: '2023-05-15T08:56:44.951Z',
-      __v: 0,
-    };
     // .concat will always return a new array while updating the old array
     setNotes(notes.concat(note));
   };
@@ -79,9 +68,8 @@ const NoteState = (props) => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1YzI3MzY4MWQ3NTU1ZWNlY2RlNmIyIn0sImlhdCI6MTY4MzkyMjc5NX0.YjSYk6fJ4Zv9qzhlYBI3h4AFtIIUvOPqzh11XrgiW-M',
       },
     });
-    const json = response.json(); // parses JSON response into native JavaScript objects
+    const json = await response.json(); // parses JSON response into native JavaScript objects
     console.log(json);
-    console.log(`deleting the current note whose id is ${id}`);
     let newNote = notes.filter((note) => {
       return note._id !== id;
     });
@@ -140,6 +128,8 @@ const NoteState = (props) => {
     console.log(`solution`, newarray);
     setNotes(newarray);
     */
+    const json = await response.json();
+    console.log(`Last updated note was ${json}`);
   };
 
   return (
@@ -149,7 +139,7 @@ const NoteState = (props) => {
         addNote: addNote,
         deleteNote: deleteNote,
         editNote: editNote,
-        getNotes,
+        getNotes: getNotes,
       }}
     >
       {props.children}
