@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-const Signup = () => {
+const Signup = (props) => {
   let navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
@@ -51,13 +51,14 @@ const Signup = () => {
 
       //redirecting user using useNavigate Hook
       navigate('/');
+      props.showAlert('success', 'Your account has been created successfully');
     } else {
-      alert('Invalid credentials');
+      props.showAlert('danger', 'invalid credentials');
     }
   };
 
   return (
-    <div className='container'>
+    <div className='container my-3'>
       <form onSubmit={handleSubmit}>
         <div className='mb-3'>
           <label htmlFor='name' className='form-label'>

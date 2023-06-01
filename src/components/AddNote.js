@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import noteContext from '../context/notes/noteContext';
-const AddNote = () => {
+const AddNote = (props) => {
   //importing use context
   const context = useContext(noteContext);
 
@@ -36,6 +36,7 @@ const AddNote = () => {
     //since we have fetched the add note hence we can pass the new note to it
     addNote(note.title, note.description, note.tag);
     setNote({ title: '', description: '', tag: '' });
+    props.showAlert('success', 'new note has been added');
   };
 
   return (

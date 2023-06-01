@@ -10,8 +10,9 @@ const Navbar = () => {
 
   return (
     <nav
-      className='navbar navbar-expand-lg bg-body-tertiary '
+      className='navbar navbar-expand-lg bg-body-tertiary sticky-top'
       data-bs-theme='dark'
+      style={{ height: '45px' }}
     >
       <div className='container-fluid'>
         <Link className='navbar-brand' to='/'>

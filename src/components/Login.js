@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 //importing useNavigate to redirect the user
 import { useNavigate } from 'react-router-dom';
-const Login = () => {
+const Login = (props) => {
+  //using props via destructuring
+  const { showAlert } = props;
+
   const [credentials, setCredentials] = useState({
     email: '',
     password: '',
@@ -42,13 +45,17 @@ const Login = () => {
 
       //redirecting user using useNavigate Hook
       navigate('/');
+      //using props via destructuring
+      showAlert('success', 'Logged-in successful');
     } else {
-      alert('Invalid credentials');
+      //using props via destructuring
+      showAlert('danger', 'Logged-in Unsuccessful due to invalid credentials');
     }
   };
 
   return (
-    <div>
+    <div className='container my-3'>
+      <h3>Login</h3>
       <form onSubmit={handleSubmit}>
         <div className='mb-3'>
           <label htmlFor='email' className='form-label'>

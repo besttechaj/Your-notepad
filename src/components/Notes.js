@@ -26,7 +26,9 @@ import React, { useContext, useEffect, useRef, useState } from 'react';
 import noteContext from '../context/notes/noteContext';
 import NoteItem from './NoteItem';
 import AddNote from './AddNote';
-const Notes = () => {
+const Notes = (props) => {
+  const { showAlert } = props;
+
   //importing use context
   const context = useContext(noteContext);
 
@@ -89,6 +91,8 @@ const Notes = () => {
 
     //using the refClose inside another method
     refClose.current.click();
+
+    showAlert('success', 'note has been successfully edited');
   };
   return (
     <>
@@ -204,7 +208,7 @@ const Notes = () => {
       </div>
 
       {/* displaying the add a note components in home page */}
-      <AddNote />
+      <AddNote showAlert={showAlert} />
 
       <div>
         {/* displaying all the user existing note */}
@@ -215,7 +219,12 @@ const Notes = () => {
           </div>
           {notes.map((note) => {
             return (
-              <NoteItem key={note._id} note={note} updateNote={updateNote} />
+              <NoteItem
+                key={note._id}
+                note={note}
+                updateNote={updateNote}
+                showAlert={showAlert}
+              />
             );
           })}
         </div>
