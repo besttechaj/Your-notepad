@@ -33,6 +33,7 @@ const NoteState = (props) => {
 
   //creating a function to add a note
   const addNote = async (title, description, tag) => {
+    console.log(title + ' ' + description + ' ' + tag);
     console.log('adding a new note');
     //TODO : api call
     const response = await fetch(`${host}/api/notes/addnote`, {
@@ -44,7 +45,11 @@ const NoteState = (props) => {
           'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQ1YzI3MzY4MWQ3NTU1ZWNlY2RlNmIyIn0sImlhdCI6MTY4MzkyMjc5NX0.YjSYk6fJ4Zv9qzhlYBI3h4AFtIIUvOPqzh11XrgiW-M',
       },
 
-      body: JSON.stringify({ title, description, tag }), // body data type must match "Content-Type" header
+      body: JSON.stringify({
+        title: title,
+        description: description,
+        tag: tag,
+      }), // body data type must match "Content-Type" header
     });
     const note = await response.json();
     console.log(note);

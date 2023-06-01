@@ -33,8 +33,9 @@ router.get('/fetchallnotes', fetchuser, async (req, res) => {
 router.post(
   '/addnote',
   [
-    body('title', 'Should have minimum length 1').isLength({ min: 1 }),
+    body('title', 'Should have minimum length 1').isLength({ min: 2 }),
     body('description', 'Should have minimum length 2').isLength({ min: 2 }),
+    body('tag', 'Should have minimum length 2').isLength({ min: 2 }),
   ],
   fetchuser,
   async (req, res) => {
@@ -58,7 +59,7 @@ router.post(
           user: req.user.id,
           title: req.body.title,
           description: req.body.description,
-          tag: req.body.description,
+          tag: req.body.tag,
         });
         console.log(`notes created successfully`);
         res.json(newNote);
